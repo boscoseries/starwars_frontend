@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 
 export const CardType1 = ({ imageSrc, altText, cardTitle, cardText, smallText }) => {
   return (
@@ -40,7 +41,11 @@ export const CardType2 = ({
   cardText,
   cardFooter,
   smallText,
-  cardClass
+  cardClass,
+  buttonType,
+  buttonClass,
+  buttonTag,
+  buttonFlexStyle
 }) => {
   return (
     <div className="card mb-3" style={cardWidth}>
@@ -54,6 +59,11 @@ export const CardType2 = ({
         <div style={footerStyle}>
           <h5>{cardFooter}</h5>
         </div>
+        {buttonType ? (
+          <div className={buttonFlexStyle} >
+            <Button buttonClass={buttonClass} buttonTag={buttonTag} buttonType={buttonType} />
+          </div>
+        ) : null}
       </div>
     </div>
   );
