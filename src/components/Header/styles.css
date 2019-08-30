@@ -1,0 +1,21 @@
+
+.card_title {
+  margin-top: 50px;
+  margin-left: 30px
+
+}
+
+.card_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px
+}
+
+.header_text {
+  color: white;
+  text-align: center;
+  font-family: 'Karla', sans-serif;
+  font-size: 22px;
+  font-weight: 200;
+}
