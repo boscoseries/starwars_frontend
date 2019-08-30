@@ -4,26 +4,33 @@ import { CardType2 } from "../Card";
 import "./styles.css";
 
 import logo from "../../images/hero-banner.jpg";
-import starWars from "../../images/swarslogo.png";
-import starWarsdirectory from "../../images/swarsdirectory.png";
+import starWarsFont from "../../images/swarslogo.png";
+import starWarDirectory from "../../images/swarsdirectory.png";
 
-export default function Header () {
+import Input from "../Input";
+
+export default function Header() {
   return (
     <div>
       <CardType2
         imageSrc={logo}
         imageClass="card-img"
         cardClass="card-img-overlay"
-        cardTitle={<img src={starWars} alt="star-wars-logo" width="130px" />}
+        cardTitle={<img src={starWarsFont} alt="star-wars-logo" width="130px" />}
         cardTitleClass="card_title"
         cardText={
-          <div className="d-flex-column justify-content-center align-items-center">
-            <p className="d-flex justify-content-center">
-              <img src={starWarsdirectory} alt="star-wars-logo" width="320px" />
-            </p>
-            <div className="header_text">
-              Find your favourite Characters, Films, Species, <br />
-              <span> Starships and Planets </span>
+          <div style={{ width: "50%" }}>
+            <div className="d-flex-column justify-content-center align-items-center">
+              <p className="d-flex justify-content-center">
+                <img src={starWarDirectory} alt="star-wars-logo" width="320px" />
+              </p>
+              <div className="header_text">
+                Find your favourite Characters, Films, Species, <br />
+                <span> Starships and Planets </span>
+              </div>
+            </div>
+            <div className='col-12 pt-4'>
+              <Input inputClass="form-control form-control-lg form-control-borderless" inputType="search" inputPlaceholder="Enter a search term" />
             </div>
           </div>
         }
