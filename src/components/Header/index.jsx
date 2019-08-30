@@ -7,6 +7,8 @@ import logo from "../../images/hero-banner.jpg";
 import starWarsFont from "../../images/swarslogo.png";
 import starWarDirectory from "../../images/swarsdirectory.png";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Input from "../Input";
 
 export default function Header() {
@@ -29,8 +31,13 @@ export default function Header() {
                 <span> Starships and Planets </span>
               </div>
             </div>
-            <div className='col-12 pt-4'>
-              <Input inputClass="form-control form-control-lg form-control-borderless" inputType="search" inputPlaceholder="Enter a search term" />
+            <div className="col-12 pt-4">
+              <Input
+                inputClass="form-control form-control-lg form-control-borderless"
+                inputType="search"
+                inputPlaceholder="Enter a search term"
+                symbol={<FontAwesomeIcon icon={faSearch} />}
+              />
             </div>
           </div>
         }
