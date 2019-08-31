@@ -44,8 +44,10 @@ export const CardType2 = ({
   cardClass,
   buttonType,
   buttonClass,
+  buttonStyles,
   buttonTag,
-  buttonFlexStyle
+  buttonFlexStyle,
+  buttonIcon
 }) => {
   return (
     <div className="card mb-3" style={cardWidth}>
@@ -61,7 +63,7 @@ export const CardType2 = ({
         </div>
         {buttonType ? (
           <div className={buttonFlexStyle} >
-            <Button buttonClass={buttonClass} buttonTag={buttonTag} buttonType={buttonType} />
+            <Button buttonClass={buttonClass} buttonTag={buttonTag} buttonType={buttonType} buttonIcon={buttonIcon} buttonStyles={buttonStyles} />
           </div>
         ) : null}
       </div>

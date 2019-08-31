@@ -1,0 +1,15 @@
+
+.title {
+  font-family: 'Roboto' sans-serif;
+  text-align: center;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 1px;
+  padding: 0px
+}
+
+.hr {
+  width: 10%;
+  border-width: 6px;
+  border-color: black
+}
