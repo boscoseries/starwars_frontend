@@ -54,7 +54,7 @@ export const CardType2 = ({
       <img src={imageSrc} height={cardClass === "card-body" ? "250px" : imageHeight} className={imageClass} alt={altText} />
       <div className={cardClass} style={{ height: "200px" }}>
         <h5 className={cardTitleClass}>{cardTitle}</h5>
-        <p className={cardTextClass}>{cardText}</p>
+        <div className={cardTextClass}>{cardText}</div>
         <p className="card-text">
           <small className="text-muted">{smallText}</small>
         </p>

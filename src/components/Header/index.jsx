@@ -23,9 +23,9 @@ export default function Header() {
         cardText={
           <div style={{ width: "50%" }}>
             <div className="d-flex-column justify-content-center align-items-center">
-              <p className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center">
                 <img src={starWarDirectory} alt="star-wars-logo" width="320px" />
-              </p>
+              </div>
               <div className="header_text">
                 Find your favourite Characters, Films, Species, <br />
                 <span> Starships and Planets </span>
