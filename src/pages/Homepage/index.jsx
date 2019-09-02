@@ -1,13 +1,35 @@
-import React from "react";
-import { CardType1, CardType2 } from "../../components/Card";
+import React, { useState, useEffect } from "react";
+import swapi from "swapi-node";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-import "./styles.css";
-import image from "../../images/rose.jpeg";
+import { CardType1, CardType2 } from "../../components/Card";
 import Button from "../../components/Button";
+import image from "../../images/rose.jpeg";
+import "./styles.css";
+
+const corsPass = "https://cors-anywhere.herokuapp.com/";
 
 export default function() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = async () => {
+    // make request to swapi api
+    const result = await swapi.get(`${corsPass}https://swapi.co/api/starships`);
+    setData(result);
+    setLoading(false);
+
+    console.log(loading);
+    console.log(data)
+  };
+
+  useEffect(() => {
+    // call fetchData function on DOM render
+    fetchData();
+  }, [ loading ] );
+
   return (
     <>
       <div className="mt-5 pt-2 mb-5 pb-2">
@@ -31,14 +53,14 @@ export default function() {
           buttonTag="Read More"
           buttonClass="btn btn-secondary btn-lg font-weight-lighter rounded-0 btn-light"
           buttonStyles={{ fontSize: "13px", padding: "12px 30px", background: "#D8D8D8" }}
-          buttonIcon={faArrowRight}
+          buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
         />
-        <div className='d-flex justify-content-center'>
-        <Button
-          buttonType="button"
-          buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
-          buttonTag="View More"
-          buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: '40%' }}
+        <div className="d-flex justify-content-center">
+          <Button
+            buttonType="button"
+            buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
+            buttonTag="View More"
+            buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
           />
         </div>
         <br />
