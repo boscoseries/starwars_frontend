@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import useImage from "../../hooks/useImage";
 import swapi from "swapi-node";
 
@@ -59,10 +60,6 @@ export default function() {
     fetchPlanets();
     fetchPeople();
   }, []);
-
-  const handleClick = () => {
-    
-  }
 
   return (
     <React.Fragment>
@@ -151,15 +148,16 @@ export default function() {
             }
           })}
       </div>
-      <div className="d-flex justify-content-center pt-2 mt-5 mb-5 pb-2">
-        <Button
-          buttonType="button"
-          buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
-          buttonTag="View More"
-          buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
-          onclick={handleClick}
-        />
-      </div>
+      <Link to="/starships">
+        <div className="d-flex justify-content-center pt-2 mt-5 mb-5 pb-2">
+          <Button
+            buttonType="button"
+            buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
+            buttonTag="View More"
+            buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
+          />
+        </div>
+      </Link>
     </React.Fragment>
   );
 }

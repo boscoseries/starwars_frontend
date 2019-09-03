@@ -30,6 +30,8 @@ export default function Starships() {
     }
   }
 
+  console.log(ships);
+
   useEffect(() => {
     fetchStarships();
   }, []);
@@ -41,7 +43,6 @@ export default function Starships() {
         {!shipLoading &&
           ships.results.map((result, index) => {
             const { name, model, cargo_capacity } = result;
-            // if (index <= 5) {
               return (
                 <CardType2
                   key={index}
@@ -63,7 +64,6 @@ export default function Starships() {
                   buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
                 />
               );
-            // }
           })}
       </div>
     </div>
