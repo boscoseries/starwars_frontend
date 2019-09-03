@@ -10,9 +10,6 @@ import Button from "../../components/Button";
 import Title from "../../components/Title";
 import "./styles.css";
 
-import img from '../../images/rose.jpeg'
-
-// const baseUrl = "../../assets";
 const folder = require.context("../../assets", false, /\.(png|jpe?g|svg)$/);
 const images = useImage(folder);
 
@@ -48,8 +45,6 @@ export default function() {
   let planetImages = [];
   let characterImages = [];
   for (let [key, value] of Object.entries(images)) {
-    // console.log(key)
-    // console.log(value)
     if (key.match(/character/)) {
       characterImages.push(value);
     }
@@ -70,13 +65,6 @@ export default function() {
     fetchPlanets();
     fetchPeople();
   }, []);
-
-  // console.log("shipLoading", shipLoading);
-  // console.log("planetLoading", planetLoading);
-  // console.log("peopleLoading", peopleLoading);
-  // console.log(ships);
-  // console.log(planets);
-  // console.log(people);
 
   return (
     <React.Fragment>
@@ -135,10 +123,13 @@ export default function() {
                   altText="flower"
                   cardWidth={{ width: "360px" }}
                   cardClass="card-img-overlay"
+                  cardBodyClass="d-flex flex-column justify-content-end"
+                  cardBodyStyle={{height: '400px'}}
                   cardTitle={name}
-                  cardTitleClass="card-title d-flex justify-content-center"
+                  cardTitleClass="card-title d-flex justify-content-start text-white"
                   cardText={`Climate: ${climate}`}
                   cardText2={`Population: ${population}`}
+                  cardTextClass="card-text text-white"
                 />
               );
             }
