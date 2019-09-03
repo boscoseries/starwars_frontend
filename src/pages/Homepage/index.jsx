@@ -12,22 +12,41 @@ import "./styles.css";
 const corsPass = "https://cors-anywhere.herokuapp.com/";
 
 export default function() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [ships, setShips] = useState([]);
+  const [planets, setPlanets] = useState([]);
+  const [people, setPeople] = useState([]);
+  const [shipLoading, setShipLoading] = useState(true);
+  const [planetLoading, setPlanetLoading] = useState(true);
+  const [peopleLoading, setPeopleLoading] = useState(true);
 
-  const fetchData = async () => {
-    // make request to swapi api
+  const fetchStarships = async () => {
     const result = await swapi.get(`${corsPass}https://swapi.co/api/starships`);
-    setData(result);
-    setLoading(false);
+    setShips(result);
+    setShipLoading(false);
+  };
+  const fetchPlanets = async () => {
+    const result = await swapi.get(`${corsPass}https://swapi.co/api/planets`);
+    setPlanets(result);
+    setPlanetLoading(false);
+  };
+  const fetchPeople = async () => {
+    const result = await swapi.get(`${corsPass}https://swapi.co/api/people`);
+    setPeople(result);
+    setPeopleLoading(false);
   };
 
   useEffect(() => {
-    // call fetchData function on DOM render
-    fetchData();
+    fetchStarships();
+    fetchPlanets();
+    fetchPeople();
   }, []);
 
-  console.log(data)
+  console.log('shipLoading', shipLoading);
+  console.log("planetLoading", planetLoading);
+  console.log("peopleLoading", peopleLoading);
+  console.log(ships)
+  console.log(planets)
+  console.log(people)
 
   return (
     <React.Fragment>
@@ -36,34 +55,34 @@ export default function() {
         <hr className="hr" />
       </div>
       <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
-        {!loading &&
-          data.results.map((result, index) => {
+        {!shipLoading &&
+          ships.results.map((result, index) => {
             const { name, model, cargo_capacity } = result;
             if (index <= 5) {
-            return (
-              // <div key={index} className="col-4" style={{ margin: "3px", padding: "0px", width: "358px", background: "yellow" }}>
-              <CardType2
-                key={index}
-                imageSrc={image}
-                imageClass="card-img-top"
-                altText="flower"
-                cardWidth={{ width: "360px" }}
-                cardClass="card-body"
-                cardTitleClass="card-title d-flex justify-content-center"
-                cardTextClass="card-text"
-                cardTitle={name}
-                cardText={`Model: ${ model }`}
-                cardText2={`Cargo Capacity: ${ cargo_capacity}`}
-                buttonType="button"
-                buttonFlexStyle="d-flex justify-content-end"
-                buttonTag="Read More"
-                buttonClass="btn btn-secondary btn-lg font-weight-lighter rounded-0 btn-light"
-                buttonStyles={{ fontSize: "13px", padding: "12px 30px", background: "#D8D8D8" }}
-                buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
-              />
-              // </div>
-            );
-          }
+              return (
+                // <div key={index} className="col-4" style={{ margin: "3px", padding: "0px", width: "358px", background: "yellow" }}>
+                <CardType2
+                  key={index}
+                  imageSrc={image}
+                  imageClass="card-img-top"
+                  altText="flower"
+                  cardWidth={{ width: "360px" }}
+                  cardClass="card-body"
+                  cardTitleClass="card-title d-flex justify-content-center"
+                  cardTextClass="card-text"
+                  cardTitle={name}
+                  cardText={`Model: ${model}`}
+                  cardText2={`Cargo Capacity: ${cargo_capacity}`}
+                  buttonType="button"
+                  buttonFlexStyle="d-flex justify-content-end"
+                  buttonTag="Read More"
+                  buttonClass="btn btn-secondary btn-lg font-weight-lighter rounded-0 btn-light"
+                  buttonStyles={{ fontSize: "13px", padding: "12px 30px", background: "#D8D8D8" }}
+                  buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
+                />
+                // </div>
+              );
+            }
           })}
       </div>
       <>
