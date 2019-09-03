@@ -62,9 +62,9 @@ export default function() {
   }, []);
 
   return (
-    <React.Fragment>
+    <div style={{margin: '2px 80px'}}>
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular Starships" lineClass="hr" />
-      <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
+      <div className="d-flex row flex-wrap justify-content-around" >
         {!shipLoading &&
           ships.results.map((result, index) => {
             const { name, model, cargo_capacity } = result;
@@ -104,7 +104,7 @@ export default function() {
         </div>
       </NavLink>
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular Planets" lineClass="hr" />
-      <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
+      <div className="d-flex row flex-wrap justify-content-around" style={{ justiyContent: "center" }}>
         {!planetLoading &&
           planets.results.map((result, index) => {
             const { name, climate, population } = result;
@@ -131,7 +131,7 @@ export default function() {
           })}
       </div>
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular People" lineClass="hr" />
-      <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
+      <div className="d-flex row flex-wrap justify-content-around" >
         {!peopleLoading &&
           people.results.map((result, index) => {
             const { name, birth_year, gender } = result;
@@ -160,6 +160,6 @@ export default function() {
           />
         </div>
       </NavLink>
-    </React.Fragment>
+    </div>
   );
 }

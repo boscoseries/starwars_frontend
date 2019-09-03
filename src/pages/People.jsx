@@ -15,7 +15,7 @@ export default function People() {
   const [peopleLoading, setPeopleLoading] = useState(true);
 
   const fetchStarships = async () => {
-    const result = await swapi.get(`${corsPass}https://swapi.co/api/starships`);
+    const result = await swapi.get(`${corsPass}https://swapi.co/api/people`);
     setPeople(result);
     setPeopleLoading(false);
   };
@@ -36,11 +36,10 @@ export default function People() {
   return (
     <>
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular People" lineClass="hr" />
-      <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
+      <div className="d-flex row flex-wrap justify-content-around" >
         {!peopleLoading &&
           people.results.map((result, index) => {
             const { name, birth_year, gender } = result;
-            if (index <= 3) {
               return (
                 <CardType1
                   key={index}
@@ -52,7 +51,6 @@ export default function People() {
                   cardTextClass="card-text"
                 />
               );
-            }
           })}
       </div>
     </>
