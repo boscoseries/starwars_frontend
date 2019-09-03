@@ -8,6 +8,7 @@ import { CardType1, CardType2 } from "../../components/Card";
 import Button from "../../components/Button";
 import image from "../../images/rose.jpeg";
 import "./styles.css";
+import Title from "../../components/Title";
 
 const corsPass = "https://cors-anywhere.herokuapp.com/";
 
@@ -41,19 +42,16 @@ export default function() {
     fetchPeople();
   }, []);
 
-  console.log('shipLoading', shipLoading);
+  console.log("shipLoading", shipLoading);
   console.log("planetLoading", planetLoading);
   console.log("peopleLoading", peopleLoading);
-  console.log(ships)
-  console.log(planets)
-  console.log(people)
+  console.log(ships);
+  console.log(planets);
+  console.log(people);
 
   return (
     <React.Fragment>
-      <div className="mt-5 pt-2 mb-5 pb-2">
-        <p className="title">Popular Starships</p>
-        <hr className="hr" />
-      </div>
+      <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular Starships" lineClass="hr" />
       <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
         {!shipLoading &&
           ships.results.map((result, index) => {
@@ -85,34 +83,66 @@ export default function() {
             }
           })}
       </div>
-      <>
-        <div className="d-flex justify-content-center">
-          <Button
-            buttonType="button"
-            buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
-            buttonTag="View More"
-            buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
-          />
-        </div>
-        <br />
-        <CardType2
-          imageSrc={image}
-          imageClass="card-img"
-          imageHeight="430px"
-          altText="flower"
-          cardWidth={{ width: "360px" }}
-          cardClass="card-img-overlay"
-          cardTitleClass="card-title"
-          cardFooter="New Card"
+      <div className="d-flex justify-content-center">
+        <Button
+          buttonType="button"
+          buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
+          buttonTag="View More"
+          buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
         />
-        <CardType1
-          imageSrc={image}
-          altText="flower"
-          cardTitle="New Card"
-          cardText="This is the containing text"
-          smallText="This is the containing text"
+      </div>
+      <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular Planets" lineClass="hr" />
+      <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
+        {!planetLoading &&
+          planets.results.map((result, index) => {
+            const { name, climate, population } = result;
+            if (index <= 2) {
+              return (
+                <CardType2
+                  key={index}
+                  imageSrc={image}
+                  imageClass="card-img"
+                  imageHeight="430px"
+                  altText="flower"
+                  cardWidth={{ width: "360px" }}
+                  cardClass="card-img-overlay"
+                  cardTitle={name}
+                  cardTitleClass="card-title d-flex justify-content-center"
+                  cardText={`Climate: ${climate}`}
+                  cardText2={`Population: ${population}`}
+                />
+              );
+            }
+          })}
+      </div>
+      <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular People" lineClass="hr" />
+      <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
+        {!peopleLoading &&
+          people.results.map((result, index) => {
+            const { name, birth_year, gender } = result;
+            if (index <= 1) {
+              return (
+                <CardType1
+                  key={index}
+                  imageSrc={image}
+                  altText="people"
+                  cardTitle={name}
+                  cardText={`Birth Year: ${birth_year}`}
+                  cardText2={`Gender: ${gender}`}
+                  cardTextClass="card-text"
+                />
+              );
+            }
+          })}
+      </div>
+      <div className="d-flex justify-content-center pt-2 mt-5 mb-5 pb-2">
+        <Button
+          buttonType="button"
+          buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
+          buttonTag="View More"
+          buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
         />
-      </>
+      </div>
     </React.Fragment>
   );
 }
