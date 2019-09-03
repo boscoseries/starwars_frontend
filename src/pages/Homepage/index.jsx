@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import useImage from "../../hooks/useImage";
 import swapi from "swapi-node";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,9 +7,16 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import { CardType1, CardType2 } from "../../components/Card";
 import Button from "../../components/Button";
-import image from "../../images/rose.jpeg";
-import "./styles.css";
 import Title from "../../components/Title";
+import "./styles.css";
+
+import img from '../../images/rose.jpeg'
+
+// const baseUrl = "../../assets";
+const folder = require.context("../../assets", false, /\.(png|jpe?g|svg)$/);
+const images = useImage(folder);
+
+console.log(images);
 
 const corsPass = "https://cors-anywhere.herokuapp.com/";
 
@@ -36,18 +44,39 @@ export default function() {
     setPeopleLoading(false);
   };
 
+  let starshipImages = [];
+  let planetImages = [];
+  let characterImages = [];
+  for (let [key, value] of Object.entries(images)) {
+    // console.log(key)
+    // console.log(value)
+    if (key.match(/character/)) {
+      characterImages.push(value);
+    }
+    if (key.match(/starship/)) {
+      starshipImages.push(value);
+    }
+    if (key.match(/planet/)) {
+      planetImages.push(value);
+    }
+  }
+
+  console.log('starships', starshipImages[0]);
+  console.log('planets', planetImages);
+  console.log('character', characterImages);
+
   useEffect(() => {
     fetchStarships();
     fetchPlanets();
     fetchPeople();
   }, []);
 
-  console.log("shipLoading", shipLoading);
-  console.log("planetLoading", planetLoading);
-  console.log("peopleLoading", peopleLoading);
-  console.log(ships);
-  console.log(planets);
-  console.log(people);
+  // console.log("shipLoading", shipLoading);
+  // console.log("planetLoading", planetLoading);
+  // console.log("peopleLoading", peopleLoading);
+  // console.log(ships);
+  // console.log(planets);
+  // console.log(people);
 
   return (
     <React.Fragment>
@@ -61,7 +90,7 @@ export default function() {
                 // <div key={index} className="col-4" style={{ margin: "3px", padding: "0px", width: "358px", background: "yellow" }}>
                 <CardType2
                   key={index}
-                  imageSrc={image}
+                  imageSrc={starshipImages[index]}
                   imageClass="card-img-top"
                   altText="flower"
                   cardWidth={{ width: "360px" }}
@@ -100,7 +129,7 @@ export default function() {
               return (
                 <CardType2
                   key={index}
-                  imageSrc={image}
+                  imageSrc={planetImages[index]}
                   imageClass="card-img"
                   imageHeight="430px"
                   altText="flower"
@@ -120,11 +149,11 @@ export default function() {
         {!peopleLoading &&
           people.results.map((result, index) => {
             const { name, birth_year, gender } = result;
-            if (index <= 1) {
+            if (index <= 3) {
               return (
                 <CardType1
                   key={index}
-                  imageSrc={image}
+                  imageSrc={characterImages[index]}
                   altText="people"
                   cardTitle={name}
                   cardText={`Birth Year: ${birth_year}`}
