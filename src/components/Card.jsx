@@ -39,8 +39,10 @@ export const CardType2 = ({
   cardTitleClass,
   cardTextClass,
   cardText,
+  cardText2,
   cardFooter,
   smallText,
+  smallText2,
   cardClass,
   buttonType,
   buttonClass,
@@ -50,23 +52,31 @@ export const CardType2 = ({
   buttonIcon
 }) => {
   return (
-    <div className="card mb-3" style={cardWidth}>
-      <img src={imageSrc} height={cardClass === "card-body" ? "250px" : imageHeight} className={imageClass} alt={altText} />
-      <div className={cardClass} style={{ height: "200px" }}>
-        <h5 className={cardTitleClass}>{cardTitle}</h5>
-        <div className={cardTextClass}>{cardText}</div>
-        <p className="card-text">
-          <small className="text-muted">{smallText}</small>
-        </p>
-        <div style={footerStyle}>
-          <h5>{cardFooter}</h5>
-        </div>
-        {buttonType ? (
-          <div className={buttonFlexStyle} >
-            <Button buttonClass={buttonClass} buttonTag={buttonTag} buttonType={buttonType} buttonIcon={buttonIcon} buttonStyles={buttonStyles} />
+          <div className="card mb-5 mr-5" style={cardWidth}>
+            <img src={imageSrc} height={cardClass === "card-body" ? "250px" : imageHeight} className={imageClass} alt={altText} />
+            <div className={cardClass} style={{ height: "200px" }}>
+              <h5 className={cardTitleClass}>{cardTitle}</h5>
+              <div className={cardTextClass}>{cardText}</div>
+              <div className={cardTextClass}>{cardText2}</div>
+              <p className="card-text">
+                <small className="text-muted">{smallText}</small>
+                <small className="text-muted">{smallText2}</small>
+              </p>
+              <div style={footerStyle}>
+                <h5>{cardFooter}</h5>
+              </div>
+              {buttonType ? (
+                <div className={buttonFlexStyle}>
+                  <Button
+                    buttonClass={buttonClass}
+                    buttonTag={buttonTag}
+                    buttonType={buttonType}
+                    buttonIcon={buttonIcon}
+                    buttonStyles={buttonStyles}
+                  />
+                </div>
+              ) : null}
+            </div>
           </div>
-        ) : null}
-      </div>
-    </div>
   );
 };

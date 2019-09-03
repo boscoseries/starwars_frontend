@@ -20,41 +20,53 @@ export default function() {
     const result = await swapi.get(`${corsPass}https://swapi.co/api/starships`);
     setData(result);
     setLoading(false);
-
-    console.log(loading);
-    console.log(data)
   };
 
   useEffect(() => {
     // call fetchData function on DOM render
     fetchData();
-  }, [ loading ] );
+  }, []);
+
+  console.log(data)
 
   return (
-    <>
+    <React.Fragment>
       <div className="mt-5 pt-2 mb-5 pb-2">
         <p className="title">Popular Starships</p>
         <hr className="hr" />
       </div>
-      <div className="container" style={{ margin: "0px 100px" }}>
-        <CardType2
-          imageSrc={image}
-          imageClass="card-img-top"
-          altText="flower"
-          cardWidth={{ width: "360px" }}
-          cardClass="card-body"
-          cardTitleClass="card-title"
-          cardTextClass="card-text"
-          cardTitle="New Card"
-          cardText="This is the containing text"
-          smallText="This is the containing text"
-          buttonType="button"
-          buttonFlexStyle="d-flex justify-content-end"
-          buttonTag="Read More"
-          buttonClass="btn btn-secondary btn-lg font-weight-lighter rounded-0 btn-light"
-          buttonStyles={{ fontSize: "13px", padding: "12px 30px", background: "#D8D8D8" }}
-          buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
-        />
+      <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
+        {!loading &&
+          data.results.map((result, index) => {
+            const { name, model, cargo_capacity } = result;
+            if (index <= 5) {
+            return (
+              // <div key={index} className="col-4" style={{ margin: "3px", padding: "0px", width: "358px", background: "yellow" }}>
+              <CardType2
+                key={index}
+                imageSrc={image}
+                imageClass="card-img-top"
+                altText="flower"
+                cardWidth={{ width: "360px" }}
+                cardClass="card-body"
+                cardTitleClass="card-title d-flex justify-content-center"
+                cardTextClass="card-text"
+                cardTitle={name}
+                cardText={`Model: ${ model }`}
+                cardText2={`Cargo Capacity: ${ cargo_capacity}`}
+                buttonType="button"
+                buttonFlexStyle="d-flex justify-content-end"
+                buttonTag="Read More"
+                buttonClass="btn btn-secondary btn-lg font-weight-lighter rounded-0 btn-light"
+                buttonStyles={{ fontSize: "13px", padding: "12px 30px", background: "#D8D8D8" }}
+                buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
+              />
+              // </div>
+            );
+          }
+          })}
+      </div>
+      <>
         <div className="d-flex justify-content-center">
           <Button
             buttonType="button"
@@ -63,7 +75,6 @@ export default function() {
             buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
           />
         </div>
-        <br />
         <br />
         <CardType2
           imageSrc={image}
@@ -82,7 +93,7 @@ export default function() {
           cardText="This is the containing text"
           smallText="This is the containing text"
         />
-      </div>
-    </>
+      </>
+    </React.Fragment>
   );
 }
