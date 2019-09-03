@@ -13,8 +13,6 @@ import "./styles.css";
 const folder = require.context("../../assets", false, /\.(png|jpe?g|svg)$/);
 const images = useImage(folder);
 
-console.log(images);
-
 const corsPass = "https://cors-anywhere.herokuapp.com/";
 
 export default function() {
@@ -56,15 +54,15 @@ export default function() {
     }
   }
 
-  console.log('starships', starshipImages[0]);
-  console.log('planets', planetImages);
-  console.log('character', characterImages);
-
   useEffect(() => {
     fetchStarships();
     fetchPlanets();
     fetchPeople();
   }, []);
+
+  const handleClick = () => {
+    
+  }
 
   return (
     <React.Fragment>
@@ -75,7 +73,6 @@ export default function() {
             const { name, model, cargo_capacity } = result;
             if (index <= 5) {
               return (
-                // <div key={index} className="col-4" style={{ margin: "3px", padding: "0px", width: "358px", background: "yellow" }}>
                 <CardType2
                   key={index}
                   imageSrc={starshipImages[index]}
@@ -95,7 +92,6 @@ export default function() {
                   buttonStyles={{ fontSize: "13px", padding: "12px 30px", background: "#D8D8D8" }}
                   buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
                 />
-                // </div>
               );
             }
           })}
@@ -124,7 +120,7 @@ export default function() {
                   cardWidth={{ width: "360px" }}
                   cardClass="card-img-overlay"
                   cardBodyClass="d-flex flex-column justify-content-end"
-                  cardBodyStyle={{height: '400px'}}
+                  cardBodyStyle={{ height: "400px" }}
                   cardTitle={name}
                   cardTitleClass="card-title d-flex justify-content-start text-white"
                   cardText={`Climate: ${climate}`}
@@ -161,6 +157,7 @@ export default function() {
           buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
           buttonTag="View More"
           buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
+          onclick={handleClick}
         />
       </div>
     </React.Fragment>

@@ -13,3 +13,7 @@
   border-width: 6px;
   border-color: black
 }
+
+.bodyHeight {
+  height: '400px'
+}
