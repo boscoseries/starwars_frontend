@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useImage from "../../hooks/useImage";
 import swapi from "swapi-node";
 
@@ -93,14 +93,16 @@ export default function() {
             }
           })}
       </div>
-      <div className="d-flex justify-content-center">
-        <Button
-          buttonType="button"
-          buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
-          buttonTag="View More"
-          buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
-        />
-      </div>
+      <NavLink to="/starhip">
+        <div className="d-flex justify-content-center">
+          <Button
+            buttonType="button"
+            buttonClass="btn btn-primary btn-lg btn-block font-weight-lighter border-dark text-dark"
+            buttonTag="View More"
+            buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
+          />
+        </div>
+      </NavLink>
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular Planets" lineClass="hr" />
       <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
         {!planetLoading &&
@@ -148,7 +150,7 @@ export default function() {
             }
           })}
       </div>
-      <Link to="/starships">
+      <NavLink to="/people">
         <div className="d-flex justify-content-center pt-2 mt-5 mb-5 pb-2">
           <Button
             buttonType="button"
@@ -157,7 +159,7 @@ export default function() {
             buttonStyles={{ fontSize: "18px", padding: "15px 30px", background: "#FFFFFF", width: "40%" }}
           />
         </div>
-      </Link>
+      </NavLink>
     </React.Fragment>
   );
 }

@@ -3,9 +3,9 @@ import React from "react";
 import { CardType2 } from "../Card";
 import "./styles.css";
 
-import logo from "../../images/hero-banner.jpg";
-import starWarsFont from "../../images/swarslogo.png";
-import starWarDirectory from "../../images/swarsdirectory.png";
+import logo from "../../assets/hero-banner.jpg";
+import starWars from "../../assets/logo.png";
+import starWarDirectory from "../../assets/swarsdirectory.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,7 @@ export default function Header() {
         imageSrc={logo}
         imageClass="card-img"
         cardClass="card-img-overlay"
-        cardTitle={<img src={starWarsFont} alt="star-wars-logo" width="130px" />}
+        cardTitle={<img src={starWars} alt="star-wars-logo" width="130px" />}
         cardTitleClass="card_title"
         cardText={
           <div style={{ width: "50%" }}>
