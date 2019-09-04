@@ -5,26 +5,29 @@ import swapi from "swapi-node";
 import ButtonGroup from "../components/ButtonGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
 import { CardType2 } from "../components/Card";
 import Title from "../components/Title";
 
+// create an object from all images in the asset folder
 const folder = require.context("../assets", false, /\.(png|jpe?g|svg)$/);
 const images = useImage(folder);
 
+// skip CORS errors on client side
 const corsPass = "https://cors-anywhere.herokuapp.com/";
 
 export default function Starships() {
   const [ships, setShips] = useState([]);
-  const [shipLoading, setShipLoading] = useState(true);
-  const [url, setUrl] = useState("https://swapi.co/api/starships");
+  const [loading, setLoading] = useState(true);
+  let [pageNum, setPageNum] = useState(1);
 
+  // function to fetch starships from SWAPI
   const fetchStarships = async () => {
-    const result = await swapi.get(`${corsPass}${url}`);
+    const result = await swapi.get(`${corsPass}https://swapi.co/api/starships/?page=${pageNum}`);
     setShips(result);
-    setShipLoading(false);
+    setLoading(false);
   };
 
+  // separate starship images from assets
   let starshipImages = [];
   for (let [key, value] of Object.entries(images)) {
     if (key.match(/starship/)) {
@@ -32,27 +35,38 @@ export default function Starships() {
     }
   }
 
-  const nextPage = (e) => {
-    e.preventDefault()
-  }
-  console.log(url);
+  // function runs onclick of next bubbon
+  const nextPage = e => {
+    const btn = document.querySelector("#pgbtn");
+    btn.disabled = true;
+    console.log(btn)
+    e.preventDefault();
+    if (!loading) {
+      setPageNum(pageNum++);
+      btn.disabled = false;
+    }
+  };
 
+  // fires content on event change
   useEffect(() => {
     fetchStarships();
-  }, []);
+  }, [pageNum]);
+
+  // console.log(ships.results.length)
+  console.log(ships);
 
   return (
     <div>
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular Starships" lineClass="hr" />
       <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
-        {!shipLoading &&
-          ships.results.map((result) => {
-            const index = Math.floor(Math.random() * Math.floor(6));
+        {!loading &&
+          ships.results.map((result, index) => {
+            const num = Math.floor(Math.random() * Math.floor(6));
             const { name, model, cargo_capacity } = result;
             return (
               <CardType2
                 key={index}
-                imageSrc={starshipImages[index]}
+                imageSrc={starshipImages[num]}
                 imageClass="card-img-top"
                 altText="image"
                 cardWidth={{ width: "360px" }}
@@ -73,7 +87,13 @@ export default function Starships() {
           })}
       </div>
       <div className="d-flex justify-content-center mt-5 pt-2 mb-5 pb-2">
-        <ButtonGroup onclick={nextPage} />
+        <ButtonGroup
+          onClick={nextPage}
+          id={"pgbtn"}
+          initial={pageNum}
+          final={!loading && (pageNum - 1) * 10 + ships.results.length}
+          total={ships.count}
+        />
       </div>
     </div>
   );
