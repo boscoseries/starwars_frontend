@@ -3,7 +3,7 @@ import Button from "./Button";
 
 export const CardType1 = ({ imageSrc, altText, cardTitle, cardText, cardText2, smallText, cardTextClass }) => {
   return (
-    <div className="card mb-3" style={{ width: "620px" }}>
+    <div className="card mb-3" style={{ width: "620px", boxSizing: 'border-box', height: "380px"}}>
       <div className="row no-gutters">
         <div className="col-md-8">
           <img src={imageSrc} height="380px" className="card-img" alt={altText} />
