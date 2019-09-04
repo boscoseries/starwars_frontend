@@ -4,6 +4,7 @@ import swapi from "swapi-node";
 
 import { CardType1 } from "../components/Card";
 import Title from "../components/Title";
+import ButtonGroup from "../components/ButtonGroup";
 
 const folder = require.context("../assets", false, /\.(png|jpe?g|svg)$/);
 const images = useImage(folder);
@@ -35,23 +36,26 @@ export default function People() {
 
   return (
     <>
-      <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular People" lineClass="hr" />
-      <div className="d-flex row flex-wrap justify-content-around" >
+      <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Starwars Characters" lineClass="hr" />
+      <div className="d-flex row flex-wrap justify-content-around">
         {!peopleLoading &&
           people.results.map((result, index) => {
             const { name, birth_year, gender } = result;
-              return (
-                <CardType1
-                  key={index}
-                  imageSrc={characterImages[index]}
-                  altText="people"
-                  cardTitle={name}
-                  cardText={`Birth Year: ${birth_year}`}
-                  cardText2={`Gender: ${gender}`}
-                  cardTextClass="card-text"
-                />
-              );
+            return (
+              <CardType1
+                key={index}
+                imageSrc={characterImages[index]}
+                altText="people"
+                cardTitle={name}
+                cardText={`Birth Year: ${birth_year}`}
+                cardText2={`Gender: ${gender}`}
+                cardTextClass="card-text"
+              />
+            );
           })}
+      </div>
+      <div className="d-flex justify-content-center mt-5 pt-2 mb-5 pb-2">
+        <ButtonGroup />
       </div>
     </>
   );
