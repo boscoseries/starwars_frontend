@@ -39,7 +39,8 @@ export default function People() {
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Starwars Characters" lineClass="hr" />
       <div className="d-flex row flex-wrap justify-content-around">
         {!peopleLoading &&
-          people.results.map((result, index) => {
+          people.results.map((result) => {
+            const index = Math.floor(Math.random() * Math.floor(4));
             const { name, birth_year, gender } = result;
             return (
               <CardType1
