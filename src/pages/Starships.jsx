@@ -17,9 +17,10 @@ const corsPass = "https://cors-anywhere.herokuapp.com/";
 export default function Starships() {
   const [ships, setShips] = useState([]);
   const [shipLoading, setShipLoading] = useState(true);
+  const [url, setUrl] = useState("https://swapi.co/api/starships");
 
   const fetchStarships = async () => {
-    const result = await swapi.get(`${corsPass}https://swapi.co/api/starships`);
+    const result = await swapi.get(`${corsPass}${url}`);
     setShips(result);
     setShipLoading(false);
   };
@@ -31,7 +32,10 @@ export default function Starships() {
     }
   }
 
-  console.log(ships);
+  const nextPage = (e) => {
+    e.preventDefault()
+  }
+  console.log(url);
 
   useEffect(() => {
     fetchStarships();
@@ -42,7 +46,8 @@ export default function Starships() {
       <Title containerClass="mt-5 pt-2 mb-5 pb-2" titleClass="title" title="Popular Starships" lineClass="hr" />
       <div className="d-flex row flex-wrap" style={{ justifyContent: "center" }}>
         {!shipLoading &&
-          ships.results.map((result, index) => {
+          ships.results.map((result) => {
+            const index = Math.floor(Math.random() * Math.floor(6));
             const { name, model, cargo_capacity } = result;
             return (
               <CardType2
@@ -68,7 +73,7 @@ export default function Starships() {
           })}
       </div>
       <div className="d-flex justify-content-center mt-5 pt-2 mb-5 pb-2">
-        <ButtonGroup />
+        <ButtonGroup onclick={nextPage} />
       </div>
     </div>
   );
