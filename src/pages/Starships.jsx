@@ -37,13 +37,9 @@ export default function Starships() {
 
   // function runs onclick of next bubbon
   const nextPage = e => {
-    const btn = document.querySelector("#pgbtn");
-    btn.disabled = true;
-    console.log(btn)
     e.preventDefault();
     if (!loading) {
       setPageNum(pageNum++);
-      btn.disabled = false;
     }
   };
 
@@ -52,8 +48,10 @@ export default function Starships() {
     fetchStarships();
   }, [pageNum]);
 
-  // console.log(ships.results.length)
-  console.log(ships);
+  // maximum listings
+  const maxListing = !loading ? (pageNum - 1) * 10 + ships.results.length : "";
+  // maximum no of pages
+  const maxPage = Math.ceil(ships.count / 10);
 
   return (
     <div>
@@ -84,14 +82,15 @@ export default function Starships() {
                 buttonIcon={<FontAwesomeIcon icon={faArrowRight} />}
               />
             );
-          })}
+          })
+        }
       </div>
       <div className="d-flex justify-content-center mt-5 pt-2 mb-5 pb-2">
         <ButtonGroup
           onClick={nextPage}
           id={"pgbtn"}
-          initial={pageNum}
-          final={!loading && (pageNum - 1) * 10 + ships.results.length}
+          initial={pageNum > maxPage ? maxPage : pageNum}
+          final={!loading && maxListing > ships.count ? ships.count : maxListing}
           total={ships.count}
         />
       </div>
