@@ -93,7 +93,7 @@ export default function() {
             }
           })}
       </div>
-      <NavLink to="/starship">
+      <NavLink to="/starships">
         <div className="d-flex justify-content-center">
           <Button
             buttonType="button"
