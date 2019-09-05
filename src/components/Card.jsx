@@ -3,7 +3,7 @@ import Button from "./Button";
 
 export const CardType1 = ({ imageSrc, altText, cardTitle, cardText, cardText2, smallText, cardTextClass }) => {
   return (
-    <div className="card mb-3" style={{ width: "620px", boxSizing: 'border-box', height: "380px"}}>
+    <div className="card mb-3" style={{ width: "620px", boxSizing: "border-box", height: "380px" }}>
       <div className="row no-gutters">
         <div className="col-md-8">
           <img src={imageSrc} height="380px" className="card-img" alt={altText} />
@@ -52,7 +52,8 @@ export const CardType2 = ({
   buttonStyles,
   buttonTag,
   buttonFlexStyle,
-  buttonIcon
+  buttonIcon,
+  viewDetails
 }) => {
   return (
     <div className="card mb-5 mr-5" style={cardWidth}>
@@ -72,7 +73,14 @@ export const CardType2 = ({
         </div>
         {buttonType ? (
           <div className={buttonFlexStyle}>
-            <Button buttonClass={buttonClass} buttonTag={buttonTag} buttonType={buttonType} buttonIcon={buttonIcon} buttonStyles={buttonStyles} />
+            <Button
+              buttonClass={buttonClass}
+              buttonTag={buttonTag}
+              buttonType={buttonType}
+              buttonIcon={buttonIcon}
+              buttonStyles={buttonStyles}
+              onClick={viewDetails}
+            />
           </div>
         ) : null}
       </div>
