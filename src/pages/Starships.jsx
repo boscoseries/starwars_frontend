@@ -56,11 +56,14 @@ export default function Starships() {
 
   // function runs onclick of previous bubbon
   const prevPage = e => {
-    // !loading && maxListing > ships.count ? ships.count : maxListing
-    // e.preventDefault();
-    // if (!loading) {
-    //   setPageA(pageB--);
-    // }
+    e.preventDefault();
+    if (!loading) {
+      let valueA = pageA <= 1 ? 1 : pageA -= 1;
+      setPageA(valueA);
+      const maxListing = (pageA - 1) * 10 + ships.results.length;
+      let valueB = maxListing > ships.count ? ships.count : maxListing;
+      setPageB(valueB);
+    }
   };
 
   // fires content on event change
